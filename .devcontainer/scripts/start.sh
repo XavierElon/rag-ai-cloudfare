@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Performs setup tasks _after_ the .devcontainer Docker container is created.
+# Ensure pnpm is in the PATH
+export PATH="/root/.local/share/pnpm:$PATH"
+
+# Verify pnpm is available
+which pnpm
+pnpm --version
 
 # Install node dependencies
-sudo pnpm install
-sudo pnpm 
+pnpm install
