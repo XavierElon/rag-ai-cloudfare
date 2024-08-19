@@ -1,47 +1,41 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/typescript-node
 {
-    "name": "rag-ai-cloudfare",
-    "build": {
-      "dockerfile": "Dockerfile"
-    },
-    "runArgs": ["--name", "rag-ai-cloudfare-dev"],
-    // "mounts": [
-    //   // cache `node_modules`
-    //   "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-    // ],
-    "customizations": {
-      "vscode": {
-        "settings": {},
-        "workspaceFolder": "${containerWorkspaceFolder}",
-        // Add the IDs of extensions you want installed when the container is created.
-        "extensions": [
-          "dbaeumer.vscode-eslint",
-          "esbenp.prettier-vscode",
-          "oderwat.indent-rainbow",
-          "mhutchie.git-graph"
-        ]
-      }
-    },
-    "containerEnv": {
-      "CHOKIDAR_USEPOLLING": "true",
-      "WATCHPACK_POLLING": "true"
-    },
-    "forwardPorts": [
-      // Application
-      3000
-
-    ],
-    "portsAttributes": {
-      // Application
-      "3000": {
-        "label": "Website Application",
-        "onAutoForward": "openBrowser"
-      }
-    },
-    // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "./.devcontainer/scripts/start.sh",
-    // Change to `"node"` to connect as non-root user instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-    "remoteUser": "root"
-  }
-  
+	"name": "rag-ai-cloudfare",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": ["--name", "rag-ai-cloudfare-dev"],
+	"mounts": [
+		// cache `node_modules`
+		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"workspaceFolder": "${containerWorkspaceFolder}",
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "oderwat.indent-rainbow", "mhutchie.git-graph"]
+		}
+	},
+	"containerEnv": {
+		"CHOKIDAR_USEPOLLING": "true",
+		"WATCHPACK_POLLING": "true"
+	},
+	"forwardPorts": [
+		// Application
+		3000
+	],
+	"portsAttributes": {
+		// Application
+		"3000": {
+			"label": "Website Application",
+			"onAutoForward": "openBrowser"
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "./.devcontainer/scripts/start.sh",
+	// Change to `"node"` to connect as non-root user instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "root"
+}
